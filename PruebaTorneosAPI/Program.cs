@@ -62,11 +62,11 @@ namespace PruebaTorneosAPI
                     Console.WriteLine("\n--- PASO 7: CONSULTAR CAMPEÓN ---");
                     await MostrarCampeon(torneoId);
 
-                    Console.WriteLine("\n✅ SIMULACIÓN COMPLETADA");
+                    Console.WriteLine("\nSIMULACIÓN COMPLETADA");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"\n❌ ERROR: {ex.Message}");
+                    Console.WriteLine($"\nERROR: {ex.Message}");
                 }
 
                 Console.WriteLine("Presiona Enter para salir...");
@@ -100,9 +100,9 @@ namespace PruebaTorneosAPI
                     return resultado.id ?? 0;
                 }
 
-                Console.WriteLine($"❌ Error al crear torneo: {response.StatusCode}");
+                Console.WriteLine($"Error al crear torneo: {response.StatusCode}");
                 string errorDetalle = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"⚠️ DETALLE DEL ERROR: {errorDetalle}");
+                Console.WriteLine($"DETALLE DEL ERROR: {errorDetalle}");
 
                 return 0;
             }
@@ -132,11 +132,11 @@ namespace PruebaTorneosAPI
                 var response = await client.PostAsync(endpoint, null);
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("✅ Acción OK: " + endpoint);
+                    Console.WriteLine("Acción OK: " + endpoint);
                     return true;
                 }
                 string error = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"⚠️ Error en API ({endpoint}): {response.StatusCode}");
+                Console.WriteLine($"Error en API ({endpoint}): {response.StatusCode}");
                 Console.WriteLine($"   Detalle: {error}");
                 return false;
             }
@@ -164,7 +164,7 @@ namespace PruebaTorneosAPI
 
                     await PutJson($"/api/Partidos/{p.Id}", p);
                 }
-                Console.WriteLine($"   ⚽ Se simularon {partidos.Count} partidos.");
+                Console.WriteLine($"Se simularon {partidos.Count} partidos.");
             }
 
             static async Task MostrarCampeon(int torneoId)
@@ -191,15 +191,15 @@ namespace PruebaTorneosAPI
                         int idCampeon = (final.GolesLocal > final.GolesVisitante) ? final.EquipoLocalId : final.EquipoVisitanteId;
 
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("       🏆 ¡TENEMOS UN CAMPEÓN! 🏆       ");
+                        Console.WriteLine("        ¡TENEMOS UN CAMPEÓN!       ");
                         Console.WriteLine("=============================================");
-                        Console.WriteLine($"\n      🎉  EL EQUIPO ID {idCampeon} HA GANADO LA COPA  🎉\n");
+                        Console.WriteLine($"\n      EL EQUIPO ID {idCampeon} HA GANADO LA COPA  \n");
                         Console.ResetColor();
                     }
                 }
                 else
                 {
-                    Console.WriteLine("⚠️ El torneo aún no ha finalizado.");
+                    Console.WriteLine(" El torneo aún no ha finalizado.");
                 }
                 Console.WriteLine("=============================================");
             }   
